@@ -19,10 +19,10 @@ Rails.application.routes.draw do
   end
 
   get "search" => "searches#search"
-  # 前回からdestroyアクションを追加する
-  resources :groups, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
-    # joinアクションを新たに追加し、ルーティングに記述
-    get 'join' => 'groups#join'
+
+  resources :groups, only: [:new, :index, :show, :create, :edit, :update] do
+    # group_users(中間テーブルをネストさせる)
+    resource :group_users, only: [:create, :destroy]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

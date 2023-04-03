@@ -11,13 +11,6 @@ class GroupsController < ApplicationController
     @book = Book.new
     @group = Group.find(params[:id])
   end
-  
-  def join
-    @group = Group.find(params[:group_id])
-    # ↓の記述は@group.usersに、current_userを追加している
-    @group.users << current_user
-    redirect_to groups_path
-  end
 
   def new
     @group = Group.new
@@ -27,9 +20,7 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     # ↓誰が作ったグループかを判断する為に必要。
     @group.owner_id = current_user.id
-    # ↓の記述は@group.usersに、current_userを追加している
-    # つまりグループ作成時点でcurrent_userはメンバーに参加を
-    @group.users << current_user
+
     if @group.save
       redirect_to groups_path
     else
@@ -48,13 +39,7 @@ class GroupsController < ApplicationController
       render "edit"
     end
   end
-  
-  def destroy
-    @group = Group.find(params[:id])
-    #current_userは、@group.usersから消されるという記述。
-    @group.users.delete(current_user)
-    redirect_to groups_path
-  end
+
 
   private
 
