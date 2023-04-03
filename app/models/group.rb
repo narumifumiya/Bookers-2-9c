@@ -1,10 +1,16 @@
 class Group < ApplicationRecord
 
-  has_many :group_users
+  has_many :group_users, dependent: :destroy
   has_many :users, through: :group_users
 
   validates :name, presence: true
   validates :introduction, presence: true
+  # active_recordを導入している為、下記にてカラムと同じようにimageを呼び出す事が出来る
   has_one_attached :image
+
+  # imageを呼び出した時に中身が空だったら、assets/images/no_image.jpgを呼び出す
+  def get_image
+    (image.attached?) ? image : 'no_image.jpg'
+  end
 
 end
