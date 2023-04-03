@@ -26,8 +26,9 @@
               <td><%= @group.name %></td>
               <td><%= @group.introduction %></td>
               <td>
+                <!-- @groupは中間テーブルを挟んでusersテーブルを見ている。-->
                 <% @group.users.each do |member| %>
-                  <p><%= member.name %></p>
+                  <li style="list-style: none;"><%= member.name %></li>
                 <% end %>
               </td>
               <td>
