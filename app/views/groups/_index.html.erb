@@ -4,7 +4,7 @@
         <th></th>
         <th>グループ名</th>
         <th>紹介文</th>
-        <th></th>
+        <th>メンバー数</th>
       </tr>
     </thead>
     <tbody>
@@ -13,11 +13,7 @@
           <td><%= image_tag group.get_image, size:"50x50" %></td>
           <td><%= link_to group.name, group_path(group) %></td>
           <td><%= group.introduction %></td>
-          <% if group.owner_id == current_user.id %>
-            <td>
-              <%= link_to 'Edit', edit_group_path(group), class: "btn btn-sm btn-success" %>
-            </td>
-          <% end %>
+          <td><%= group.users.count %></td>
         </tr>
       <% end %>
     </tbody>

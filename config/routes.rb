@@ -19,8 +19,11 @@ Rails.application.routes.draw do
   end
 
   get "search" => "searches#search"
-  # except destroyアクション以外のルーティングを生成
-  resources :groups, except: [:destroy]
+  # 前回からdestroyアクションを追加する
+  resources :groups, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
+    # joinアクションを新たに追加し、ルーティングに記述
+    get 'join' => 'groups#join'
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
