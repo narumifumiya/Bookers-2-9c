@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :groups, only: [:new, :index, :show, :create, :edit, :update] do
     # group_users(中間テーブルをネストさせる)
     resource :group_users, only: [:create, :destroy]
+    #新たにevent_noticesコントローラを作成
     resources :event_notices, only: [:new, :create]
     get "event_notices" => "event_notices#sent"
   end
