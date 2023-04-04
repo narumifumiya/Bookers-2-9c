@@ -43,14 +43,15 @@
               </td>
               <td>
                 <% if @group.owner_id == current_user.id %>
-                  <%= link_to 'Edit', edit_group_path(@group), class: "btn btn-sm btn-success" %>
+                  <td>
+                    <%= link_to 'Edit', edit_group_path(@group), class: "btn btn-sm btn-success" %>
+                  </td>
+                  <td>
+                    <%= link_to 'Notice an Event', new_group_event_notice_path(@group), class: "btn btn-sm btn-info" %>
+                  </td>
                 <% end %>
               </td>
-              <td>
-                <% if @group.owner_id == current_user.id %>
-                  <%= link_to 'Mail', group_new_mail_path(@group), class: "btn btn-sm btn-success" %>
-                <% end %>
-              </td>
+              
             </tr>
         </tbody>
       </table>
